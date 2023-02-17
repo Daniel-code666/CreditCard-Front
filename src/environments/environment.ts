@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  HOST1: "http://localhost:90/api/User/",
+  HOST2: "http://localhost:90/api/CreditCard/",
+  TOKEN: "Token"
 };
 
 /*

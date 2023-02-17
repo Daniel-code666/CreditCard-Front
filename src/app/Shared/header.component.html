@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+        <img src="../../../assets/img/skull-fire.gif" alt="Logo" width="60" height="46"
+            class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="/" style="color:white">Credit Card App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li *ngIf="isLogged == 'false'">
+                    <a class="nav-link active" aria-current="page" style="color:white" routerLink="/register">
+                        Registrarse
+                    </a>
+                </li>
+            </ul>
+
+            <div *ngIf="isLogged == 'true'" class="d-flex">
+                <button (click)="log_out()"  class="btn btn-success">Salir</button>
+            </div>
+        </div>
+    </div>
+</nav>

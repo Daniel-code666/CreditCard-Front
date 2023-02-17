@@ -1,0 +1,80 @@
+<div style="margin-left: 25px;">
+    <h1>Lista de tarjetas</h1>
+</div>
+<hr>
+<div class="d-flex justify-content-center">
+    <div class="col-11 d-grid gap-2">
+        <button class="btn btn-primary btn-sm" (click)="openFormModal()">
+            Añadir tarjeta
+        </button>
+    </div>
+</div>
+<br>
+<div class="d-flex justify-content-center" style="margin-bottom: 50px;">
+    <div class="col-11">
+        <div *ngIf="cards == null; else showTable">
+            <h4 style="text-align: center;">No hay tarjetas registradas</h4>
+        </div>
+        <ng-template #showTable>
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="table table-striped table-bordered table-sm row-border hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Número de tarjeta</th>
+                        <th>Fecha de expiración</th>
+                        <th>CVV</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let card of cards">
+                        <td>{{ card.cardId }}</td>
+                        <td>{{ card.cardNumber }}</td>
+                        <td>{{ card.expiringDate }}</td>
+                        <td>{{ card.cvv }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" style="margin-left: 5px;" (click)="deleteCreditCard(card.cardId)">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-template>
+    </div>
+</div>
+
+<!--form modal-->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registrar tarjeta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="newCardForm" (ngSubmit)="createCreditCard()">
+                    Número de la tarjeta:
+                    <input [class.is-invalid]="newCardForm.get('cardNumber')?.touched && newCardForm.get('cardNumber')?.invalid"
+                        type="cardNumber" class="form-control" formControlName="cardNumber">
+                    CVV:
+                    <input [class.is-invalid]="newCardForm.get('cvv')?.touched 
+                        && newCardForm.get('cvv')?.invalid"
+                        type="cvv" class="form-control" formControlName="cvv">
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Registrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<br>
